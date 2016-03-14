@@ -1,0 +1,31 @@
+{
+  "name": "aina",
+  "version": "0.0.1",
+  "description": "Artificial intelligence for life and home automation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tlaukkanen/aina.git"
+  },
+  "keywords": [
+    "ai",
+    "bot",
+    "chatbot",
+    "artificial-intelligence",
+    "automation"
+  ],
+  "author": "Tommi Laukkanen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tlaukkanen/aina/issues"
+  },
+  "homepage": "https://github.com/tlaukkanen/aina#readme",
+  "dependencies": {
+    "natural-brain": "^0.2.0",
+    "request": "^2.69.0",
+    "speakeasy-nlp": "^0.2.2"
+  }
+}
