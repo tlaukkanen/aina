@@ -25,6 +25,8 @@
   "homepage": "https://github.com/tlaukkanen/aina#readme",
   "dependencies": {
     "natural-brain": "^0.2.0",
+    "node-dht-sensor": "0.0.11",
+    "node-telegram-bot-api": "^0.21.1",
     "request": "^2.69.0",
     "speakeasy-nlp": "^0.2.2"
   }
