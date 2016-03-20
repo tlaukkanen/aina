@@ -1,3 +1,4 @@
 {
-    "telegramBotToken": "ABCDEFG1234567890"
+    "telegramBotToken": "ABCDEFG1234567890",
+    "enableTemperature": "false"
 }

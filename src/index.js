@@ -1,35 +1,42 @@
+"use strict";
+
 var TelegramBot = require('node-telegram-bot-api');
-var config = require('./config.json');
+var config = require('./../config.json');
 var request = require('request');
 var speak = require('speakeasy-nlp');
-var sensorLib = require('node-dht-sensor');
-
+if(config.enableTemperature) {
+    var sensorLib = require('node-dht-sensor');
+}
+var AinaBrain = require('./brain.js');
+var brain = new AinaBrain();
 var latestReadout = 0;
 var latestHumidity = 0;
 
-var sensor = {
-    initialize: function () {
-        return sensorLib.initialize(11, 4);
-    },
-    read: function () {
-        var readout = sensorLib.read();
-	latestReadout = readout.temperature.toFixed(3);
-	latestHumidity = readout.humidity.toFixed(3);
-        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
-            'humidity: ' + readout.humidity.toFixed(2) + '%');
-        setTimeout(function () {
-            sensor.read();
-        }, 60000);
+if(config.enableTemperature) {
+
+    var sensor = {
+        initialize: function () {
+            return sensorLib.initialize(11, 4);
+        },
+        read: function () {
+            var readout = sensorLib.read();
+        latestReadout = readout.temperature.toFixed(3);
+        latestHumidity = readout.humidity.toFixed(3);
+            console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+                'humidity: ' + readout.humidity.toFixed(2) + '%');
+            setTimeout(function () {
+                sensor.read();
+            }, 60000);
+        }
+    };
+
+    if (sensor.initialize()) {
+        sensor.read();
+    } else {
+        console.warn('Failed to initialize sensor');
     }
-};
-
-
-if (sensor.initialize()) {
-    sensor.read();
-} else {
-    console.warn('Failed to initialize sensor');
+    
 }
-
 
 var options = {
   polling: true
@@ -74,9 +81,11 @@ bot.onText(/.*/, function(msg, match){
 
 function respond(original, message, chatId) {
     var classify = speak.classify(original.text);
+    var topic = brain.classify(original.text);
     var info = JSON.stringify(classify); // "action: " + classify.action + " owner=" + classify.owner + " subject=" + classify.subject;
     var sentiment = speak.sentiment.analyze(original.text);
     info += " sentiment: " + sentiment.score;
+    info += " topic: " + topic;
     info += "\ntemp: " + latestReadout + "'C humidity: " + latestHumidity + "%";
     bot.sendMessage(chatId, message + "\n" + info );               
 }
