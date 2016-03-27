@@ -14,7 +14,7 @@ var latestHumidity = 0;
 var schedule = require('node-schedule');
 var loki = require('lokijs');
 var db = new loki('loki.json');
-db.addCollection('temperatures', {indices:['date']});
+var measurements = db.addCollection('temperatures', {indices:['date']});
 
 if(config.enableTemperature) {
 
@@ -61,7 +61,7 @@ var tempSchedule = schedule.scheduleJob('0 0 * * * *', function(){
         temperature: latestReadout,
         humidity: latestHumidity
     }
-    db.insert(row);
+    measurements.insert(row);
     db.save();
     console.log("to loki: " + JSON.stringify(row));
 });
