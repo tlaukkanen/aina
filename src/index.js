@@ -11,6 +11,10 @@ var AinaBrain = require('./brain.js');
 var brain = new AinaBrain();
 var latestReadout = 0;
 var latestHumidity = 0;
+var schedule = require('node-schedule');
+var loki = require('lokijs');
+var db = new loki('loki.json');
+db.addCollection('temperatures', {indices:['date']});
 
 if(config.enableTemperature) {
 
@@ -35,8 +39,32 @@ if(config.enableTemperature) {
     } else {
         console.warn('Failed to initialize sensor');
     }
-    
 }
+
+function getDateStamp() {
+    var now = new Date();
+    var month = (now.getUTCMonth() + 1)<10 ? "0" + now.getUTCMonth()+1 : "" + now.getUTCMonth();
+    var day = now.getUTCDate()<10 ? "0" + now.getUTCDate() : "" + now.getUTCDate();
+    var hours = now.getUTCHours()<10 ? "0" + now.getUTCHours() : "" + now.getUTCHours();
+    var minutes = now.getUTCMinutes()<10 ? "0" + now.getUTCMinutes() : "" + now.getUTCMinutes();
+    var stamp = "" + now.getUTCFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+    return stamp;
+}
+
+var tempSchedule = schedule.scheduleJob('0 0 * * * *', function(){
+    console.log("schedule ping: " + new Date().getUTCHours());
+    var now = new Date();
+    
+    var key = now.getUTCFullYear() + (now.getUTCMonth()+1)
+    var row = {
+        date: getDateStamp(),
+        temperature: latestReadout,
+        humidity: latestHumidity
+    }
+    db.insert(row);
+    db.save();
+    console.log("to loki: " + JSON.stringify(row));
+});
 
 var options = {
   polling: true
@@ -73,6 +101,14 @@ bot.onText(/.*what.*lunch.*\?/, function(msg, match) {
         }
     );
 });
+
+bot.onText(/\/shutdown/, function(msg, match){
+   var chatId = msg.chat.id;
+   respond(msg, "Shutting down", chatId);
+   setTimeout(function(){
+       process.exit();
+   }, 1000);     
+})
 
 bot.onText(/.*/, function(msg, match){
     var chatId = msg.chat.id;
