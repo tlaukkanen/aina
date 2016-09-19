@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/tlaukkanen/aina#readme",
   "dependencies": {
+    "ector": "^1.0.1",
     "natural-brain": "^0.2.0",
+    "node-telegram-bot-api": "^0.21.1",
     "request": "^2.69.0",
     "speakeasy-nlp": "^0.2.2"
   }
