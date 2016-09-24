@@ -28,7 +28,7 @@ function AinaBrain() {
 
     classifier.train();
 
-    personalityBot.loadDirectory('personality', personalityLoadingDone, personalityLoadingError)
+    personalityBot.loadDirectory('C:\\code\\aina\\src\\personality', personalityLoadingDone, personalityLoadingError)
 }
 
 function personalityLoadingDone(files) {
@@ -46,7 +46,7 @@ AinaBrain.prototype.classify = function(sentence) {
 }
 
 AinaBrain.prototype.getResponse = function(sentence) {
-
+    return personalityBot.reply("local-user", sentence);
 }
 
 module.exports = AinaBrain;
