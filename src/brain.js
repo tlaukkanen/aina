@@ -31,10 +31,15 @@ function AinaBrain(config) {
     classifier.addDocument('who is the best actor?', 'movies');
     classifier.addDocument('any good movies to suggest?', 'movies');
 
-    // movies
+    // music
     classifier.addDocument('who plays this song?', 'music');
     classifier.addDocument('what is your favourite band?', 'music');
     classifier.addDocument('what songs are on that album?', 'music');
+
+    // books
+    classifier.addDocument('who wrote this book?', 'books');
+    classifier.addDocument('what is your favourite author?', 'books');
+    classifier.addDocument('what books do you like?', 'books');    
 
     classifier.train();
 
