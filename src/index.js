@@ -8,7 +8,7 @@ if(config.enableTemperature) {
     var sensorLib = require('node-dht-sensor');
 }
 var AinaBrain = require('./brain.js');
-var brain = new AinaBrain();
+var brain = new AinaBrain(config);
 var latestReadout = 0;
 var latestHumidity = 0;
 var schedule = require('node-schedule');

@@ -1,4 +1,5 @@
 {
     "telegramBotToken": "ABCDEFG1234567890",
-    "enableTemperature": "false"
+    "enableTemperature": "false",
+    "riveScriptsDirectory": "src/personality"
 }

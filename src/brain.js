@@ -5,7 +5,7 @@ var BrainJSClassifier = require('natural-brain');
 var classifier = new BrainJSClassifier();
 var personalityBot = new RiveScript();
 
-function AinaBrain() {
+function AinaBrain(config) {
     // food
     classifier.addDocument('what is in the lunch menu?', 'food');
     classifier.addDocument('i am hungry.', 'food');
@@ -26,9 +26,19 @@ function AinaBrain() {
     classifier.addDocument('how to check disk space on linux?', 'linux');
     classifier.addDocument('how to list directories with bash?', 'linux');
 
+    // movies
+    classifier.addDocument('what is a good movie?', 'movies');
+    classifier.addDocument('who is the best actor?', 'movies');
+    classifier.addDocument('any good movies to suggest?', 'movies');
+
+    // movies
+    classifier.addDocument('who plays this song?', 'music');
+    classifier.addDocument('what is your favourite band?', 'music');
+    classifier.addDocument('what songs are on that album?', 'music');
+
     classifier.train();
 
-    personalityBot.loadDirectory('C:\\code\\aina\\src\\personality', personalityLoadingDone, personalityLoadingError)
+    personalityBot.loadDirectory(config.riveScriptsDirectory, personalityLoadingDone, personalityLoadingError)
 }
 
 function personalityLoadingDone(files) {
