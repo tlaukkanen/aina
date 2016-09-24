@@ -1,7 +1,9 @@
 "use strict";
+var RiveScript = require('RiveScript');
 
 var BrainJSClassifier = require('natural-brain');
 var classifier = new BrainJSClassifier();
+var personalityBot = new RiveScript();
 
 function AinaBrain() {
     // food
@@ -25,10 +27,26 @@ function AinaBrain() {
     classifier.addDocument('how to list directories with bash?', 'linux');
 
     classifier.train();
+
+    personalityBot.loadDirectory('personality', personalityLoadingDone, personalityLoadingError)
 }
+
+function personalityLoadingDone(files) {
+    console.log('Personality loaded');
+    personalityBot.sortReplies();
+}
+
+function personalityLoadingError(files, error) {
+    console.log('Error loading personality: ' + error);
+}
+
 
 AinaBrain.prototype.classify = function(sentence) {
     return classifier.classify( sentence );
+}
+
+AinaBrain.prototype.getResponse = function(sentence) {
+
 }
 
 module.exports = AinaBrain;

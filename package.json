@@ -34,6 +34,7 @@
     "node-schedule": "^1.1.0",
     "node-telegram-bot-api": "^0.21.1",
     "request": "^2.69.0",
+    "rivescript": "^1.16.0",
     "speakeasy-nlp": "^0.2.2"
   }
 }
