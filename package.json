@@ -25,10 +25,8 @@
   },
   "homepage": "https://github.com/tlaukkanen/aina#readme",
   "dependencies": {
-    "ector": "^1.0.1",
     "natural-brain": "^0.2.0",
     "lokijs": "^1.3.16",
-    "natural-brain": "^0.2.0",
     "nedb": "^1.8.0",
     "node-dht-sensor": "0.0.11",
     "node-schedule": "^1.1.0",

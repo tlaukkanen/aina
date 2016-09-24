@@ -16,8 +16,8 @@ var loki = require('lokijs');
 var db = new loki('loki.json');
 var measurements = db.addCollection('temperatures', {indices:['date']});
 
-var Ector = require('ector');
-var ector = new Ector();
+//var Ector = require('ector');
+//var ector = new Ector();
 
 
 if(config.enableTemperature) {
@@ -117,10 +117,12 @@ bot.onText(/\/shutdown/, function(msg, match){
 bot.onText(/.*/, function(msg, match){
     var chatId = msg.chat.id;
 
-    ector.addEntry(msg.text);
-    var response = ector.generateResponse();
+    //ector.addEntry(msg.text);
+    //var response = ector.generateResponse();
 
-   respond(msg, response.sentence, chatId); 
+    var response = brain.getResponse(msg.text);
+
+   respond(msg, response, chatId); 
 });
 
 function respond(original, message, chatId) {
