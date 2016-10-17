@@ -15,7 +15,7 @@
 + int ask user variable
 * <get name> == undefined => What's your name?
 * <get age> == undefined => How old are you?
-* <get gender> == undefined => Are you a boy or a girl?
+* <get gender> == undefined => Are you a male or a female?
 - {@int ask random question}
 
 + ask me [*] about myself|ask me [*] personal question
@@ -30,7 +30,7 @@
 @ i am <star> years old
 
 + [*] (@malenoun|@femalenoun) [*]
-% [*] are you a boy or a girl
+% [*] are you a male or a female
 @ i am a <star>
 
 + forget my (name|age|gender)
@@ -57,10 +57,6 @@
 
 + (call me|i am|i am called|im) (<bot master>) [*]{weight=1}
 @ my name is <star2> // TODO https://github.com/aichaos/rivescript-go/issues/1
-
-+ (call me|i am|i am called) * *
-- I only want to know your first name. Which one of those names do you want\s
-  ^ to go by?
 
 + (call me|i am|i am called) *
 - <set tmp={formal}<star2>{/formal}>Is that really your name?
@@ -94,18 +90,18 @@
 
 + (i am|im) [a] @malenoun
 * <bot gender> == male => <set gender=male>{random}I am too.|Me too!{/random}
-* <bot gender> == female => <set gender=male>Cool. I'm a girl.
+* <bot gender> == female => <set gender=male>Cool. I'm a female.
 - <set gender=male>Cool; I'm a <bot gender>
 
 + (i am|im) [a] @femalenoun
 * <bot gender> == female => <set gender=female>{random}I am too.|Me too!{/random}
-* <bot gender> == male => <set gender=female>Cool. I'm a boy.
+* <bot gender> == male => <set gender=female>Cool. I'm a male.
 - <set gender=male>Cool; I'm a <bot gender>
 
 + what (sex|gender) am i|what is my (sex|gender)
-* <get gender> == male => You're a {random}man|guy|boy{/random}.
-* <get gender> == female => You're a {random}woman|girl|lady{/random}.
-- I don't know what you are; are you a boy or a girl?
+* <get gender> == male => You're a {random}man|guy|male{/random}.
+* <get gender> == female => You're a {random}woman|female|lady{/random}.
+- I don't know what you are; are you a male or a female?
 
 + am i [a] @malenoun or [a] @femalenoun
 @ what gender am i
