@@ -1,5 +1,5 @@
 "use strict";
-var RiveScript = require('RiveScript');
+var RiveScript = require('rivescript');
 
 var BrainJSClassifier = require('natural-brain');
 var classifier = new BrainJSClassifier();

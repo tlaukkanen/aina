@@ -54,7 +54,7 @@
 	- Can I just get your first name? {@int help}
 
 	+ (@first_names)
-	- <set name=<formal>>Your name is <get name>? Cool! Are you a boy or a girl?
+	- <set name=<formal>>Your name is <get name>? Cool! Are you a male or a female?
 	^ <set retry=0>{topic=interview3}
 
 	+ *
@@ -64,7 +64,7 @@
 	+ [*] @yes [*]
 	% is that a real name *
 	- <set name=<get tmp>>Okay, then - I'll call you <get name>.
-	^ Well, are you a boy or a girl?
+	^ Well, are you a male or a female?
 	^ <set retry=0>{topic=interview3}
 
 	+ (my name is|call me|i am|im) *
@@ -81,13 +81,13 @@
 // Interview: user responds with their gender.
 > topic interview3 includes interview_common
 	+ @malenoun
-	* <bot gender> == male => Me too! How old are you?{@int male}
-	* <bot gender> == female => Cool! I'm a girl. How old are you?{@int male}
+	* <bot gender> == male => Okay! How old are you?{@int male}
+	* <bot gender> == female => Cool! How old are you?{@int male}
 	- Cool! I'm a <bot gender>. How old are you?{@int male}
 
 	+ @femalenoun
 	* <bot gender> == female => Me too! How old are you?{@int female}
-	* <bot gender> == male => Cool! I'm a boy. How old are you?{@int female}
+	* <bot gender> == male => Cool! How old are you?{@int female}
 	- Cool! I'm a <bot gender>. How old are you?{@int female}
 
 	+ [i am|im] a (@malenoun|@femalenoun)
@@ -95,8 +95,8 @@
 
 	+ *
 	* <get retry> > <env interview_retry> => {@int abort}
-	- I asked if you're a boy or a girl? {@int help}
-	- So are you a boy or a girl? {@int help}
+	- I asked if you're a male or a female? {@int help}
+	- So are you a male or a female? {@int help}
 
 	+ int help
 	- <add retry=1>{@int help gender}
