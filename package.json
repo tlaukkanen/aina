@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "nsp": "nsp check",
     "start": "node src/index.js"
   },
   "repository": {
@@ -33,5 +34,8 @@
     "request": "^2.69.0",
     "rivescript": "^1.16.0",
     "speakeasy-nlp": "^0.2.2"
+  },
+  "devDependencies": {
+    "nsp": "^2.6.2"
   }
 }
