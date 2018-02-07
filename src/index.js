@@ -4,46 +4,13 @@ var TelegramBot = require('node-telegram-bot-api');
 var config = require('./../config.json');
 var request = require('request');
 var speak = require('speakeasy-nlp');
-if(config.enableTemperature) {
-    var sensorLib = require('node-dht-sensor');
-}
 var AinaBrain = require('./brain.js');
 var brain = new AinaBrain(config);
-var latestReadout = 0;
-var latestHumidity = 0;
-var schedule = require('node-schedule');
 var loki = require('lokijs');
 var db = new loki('loki.json');
-var measurements = db.addCollection('temperatures', {indices:['date']});
 
 //var Ector = require('ector');
 //var ector = new Ector();
-
-
-if(config.enableTemperature) {
-
-    var sensor = {
-        initialize: function () {
-            return sensorLib.initialize(11, 4);
-        },
-        read: function () {
-            var readout = sensorLib.read();
-        latestReadout = readout.temperature.toFixed(3);
-        latestHumidity = readout.humidity.toFixed(3);
-            console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
-                'humidity: ' + readout.humidity.toFixed(2) + '%');
-            setTimeout(function () {
-                sensor.read();
-            }, 60000);
-        }
-    };
-
-    if (sensor.initialize()) {
-        sensor.read();
-    } else {
-        console.warn('Failed to initialize sensor');
-    }
-}
 
 function getDateStamp() {
     var now = new Date();
@@ -54,21 +21,6 @@ function getDateStamp() {
     var stamp = "" + now.getUTCFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes;
     return stamp;
 }
-
-var tempSchedule = schedule.scheduleJob('0 0 * * * *', function(){
-    console.log("schedule ping: " + new Date().getUTCHours());
-    var now = new Date();
-    
-    var key = now.getUTCFullYear() + (now.getUTCMonth()+1)
-    var row = {
-        date: getDateStamp(),
-        temperature: latestReadout,
-        humidity: latestHumidity
-    }
-    measurements.insert(row);
-    db.save();
-    console.log("to loki: " + JSON.stringify(row));
-});
 
 var options = {
   polling: true
@@ -132,6 +84,5 @@ function respond(original, message, chatId) {
     var sentiment = speak.sentiment.analyze(original.text);
     info += " sentiment: " + sentiment.score;
     info += " topic: " + topic;
-    info += "\n" + latestReadout + "'C " + latestHumidity + "%";
     bot.sendMessage(chatId, message + "\n" + info );               
 }
