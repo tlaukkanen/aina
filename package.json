@@ -8,7 +8,8 @@
     "nsp": "nsp check",
     "start": "node src/index.js",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -28,16 +29,19 @@
   },
   "homepage": "https://github.com/tlaukkanen/aina#readme",
   "dependencies": {
-    "natural-brain": "^0.3.1",
     "lokijs": "^1.5.2",
+    "natural-brain": "^0.3.1",
     "nedb": "^1.8.0",
     "node-telegram-bot-api": "^0.30.0",
     "request": "^2.83.0",
     "rivescript": "^1.18.0",
-    "speakeasy-nlp": "^0.2.12",
-    "snyk": "^1.43.0"
+    "snyk": "^1.43.0",
+    "speakeasy-nlp": "^0.2.12"
   },
   "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "nsp": "^3.1.0"
   },
   "snyk": true
