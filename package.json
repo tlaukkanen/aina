@@ -28,17 +28,9 @@
   },
   "homepage": "https://github.com/tlaukkanen/aina#readme",
   "dependencies": {
-    "natural-brain": "^0.3.1",
-    "lokijs": "^1.5.2",
-    "nedb": "^1.8.0",
-    "node-telegram-bot-api": "^0.30.0",
-    "request": "^2.83.0",
-    "rivescript": "^1.18.0",
-    "speakeasy-nlp": "^0.2.12",
+    "node-telegram-bot-api": "0.50.0",
+    "rivescript": "2.1.0",
     "snyk": "^1.43.0"
-  },
-  "devDependencies": {
-    "nsp": "^3.1.0"
   },
   "snyk": true
 }
