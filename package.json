@@ -30,7 +30,7 @@
   "dependencies": {
     "node-telegram-bot-api": "0.50.0",
     "rivescript": "2.1.0",
-    "snyk": "^1.465.0"
+    "snyk": "^1.667.0"
   },
   "snyk": true
 }
