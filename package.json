@@ -32,10 +32,10 @@
     "lokijs": "^1.5.2",
     "natural-brain": "^0.3.1",
     "nedb": "^1.8.0",
-    "node-telegram-bot-api": "^0.30.0",
+    "node-telegram-bot-api": "^0.50.0",
     "request": "^2.83.0",
-    "rivescript": "^1.18.0",
-    "snyk": "^1.43.0",
+    "rivescript": "^2.1.0",
+    "snyk": "^1.165.0",
     "speakeasy-nlp": "^0.2.12"
   },
   "devDependencies": {
