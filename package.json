@@ -35,7 +35,7 @@
     "node-telegram-bot-api": "^0.50.0",
     "request": "^2.83.0",
     "rivescript": "^2.1.0",
-    "snyk": "^1.165.0",
+    "snyk": "^1.1064.0",
     "speakeasy-nlp": "^0.2.12"
   },
   "devDependencies": {
